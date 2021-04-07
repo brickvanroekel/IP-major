@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem,amssymb} % Checkboxes
+\usepackage{multicol} % Multicol
+
+\title{IP Major opdracht 21-21}
+\author{Tom Eversdijk \& Wannes Fransen}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\graphicspath{ {./img/} }
+
+\usepackage{url}
+\usepackage{float}
+\usepackage{hyperref}
+
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+
+\begin{document}
+\maketitle
+
+\section{Inleiding}
+\begin{itemize}
+    \item Deadline: \textbf{\date{16 mei 23u59}}, je code moet op dat moment ingeleverd zijn op Toledo \& github.
+    \item Je werkt in groep van 2 personen aan de volledige opgave.
+    \item Er wordt gebruik gemaakt van een github classroom. Accepteer hiervoor de link op Toledo.
+    \item Tijdens het examen zul je een extra functionaliteit moeten toevoegen aan je applicatie, zorg er dus voor dat je applicatie eenvoudig uitgebreid kan worden en dat je perfect weet hoe je applicatie werkt. Dit komt bovendien ook van pas tijdens de mondelinge verdediging.
+    \item Dit project telt voor 30\% mee voor je uiteindelijke score van dit vak. Deze 30\% geldt enkel voor het project, de uitbereiding die tijdens het examen wordt toegevoegd is onderdeel van de 70\% van het examen.
+    \item Omdat het project een onderdeel is voor de evaluatie van dit vak, is het examenreglement hierop van toepassing. Schrijf dus je eigen oplossing! Wanneer je hulp krijgt of geeft aan een mede-student, zorg er dan voor dat het altijd over algemeen advies gaat en deel geen code. Vermeld ook altijd je bron. Dit geldt zowel voor contact in persoon maar ook voor advies via online forums. 
+    \item Heb je problemen met je project kun je altijd naar het monitoraat komen. Daarnaast is het ook mogelijk om je vraag op het Toledo forum te plaatsen. Mails met vragen zullen onbeantwoord blijven.
+\end{itemize}{}
+\section{Opgave}
+Met de huidige Corona pandemie zijn steeds meer winkels overgeschakeld naar online verkoop, hiervoor hebben ze snel een webshop moeten ontwikkelen. Dit is dan ook exact wat jullie voor dit project zullen moeten ontwikkelen. Voor de webshop wordt er verwacht dat verschillende 'standaard' webshop functionaliteiten geimplementeerd zijn en geraadpleegt kunnen worden via een browser. Naast `standaard` webshop functionaliteiten moet er ook een API beschikbaar zijn zodat bepaalde admin functionaliteiten beschikbaar zijn via een andere applicatie.
+\\
+\\
+Een aantal van de belangrijke functionaliteiten zullen aan bod komen tijdens de les. Echter wordt er bij het uitwerken van deze opdracht ook verwacht dat de student zelfstandig leert informatie op te zoeken en verwerken.
+
+\section{Gasten, geregistreerd gebruikers en admins}
+Iedere gebruiker die naar de webshop surft heeft de mogelijkheid om de producten uit de webshop te bekijken. Het plaatsen van een bestelling is echter enkel mogelijk met een geregistreerd account. Daarom moet er op de webshop de mogelijkheid zijn dat een gebruiker zich kan registreren met volgende gegevens: \textit{voornaam, achternaam, e-mail adres, wachtwoord, land, stad of dorp, postcode, straat, huisnummer}. Eens aangemeld moeten al deze gegevens uiteraard ook door de gebruiker gewijzigd kunnen worden. Naast standaard gebruikers zijn er ook admin gebruikers. Dit zijn werknemers van de webshop met extra bevoegdheden. Zij moeten hun eigen en klant gegevens kunnen aanpassen. Het registreren van een nieuwe admin kan enkel gebeuren door een andere admin die reeds toegang heeft. 
+\\ 
+\\
+Het registratieproces (voor zowel admins als standaard gebruikers) gebeurd in twee stappen. Een eerste stap is het ingeven van de nodige gegevens op een registratie pagina. Dit zal een verificatie email versturen naar het ingegeven e-mail adres met een unieke 24h geldige link. Als de gebruiker deze link gebruikt is het account geverifieerd en kunnen er bestellingen geplaatst worden. Wordt de link gebruikt na de 24h geldigheidsperiode, dan wordt er automatisch een nieuwe link gestuurd naar het email adres. Een reeds geverifieerde admin heeft de mogelijkheid om gebruikers ook manueel te verifieren zonder registratielink. Bovendien moet de mail met de verificatielink verstuurd worden in de taal waarin de gebruiker de pagina bezoekt. 
+\\
+\\
+\textit{\textbf{Tip:} gebruik \href{https://hexdocs.pm/bamboo/1.1.0/readme.html}{Bamboo}  met \href{https://sendgrid.com}{SendGrid} voor het versturen van mails. Op \href{https://elixircasts.io/password-reset}{Elixircasts.io} staat een goede handleiding voor het gelijkaardig proces van wachtwoord reset. Het gebruiken van de text-layout van mails is het eenvoudigste}
+
+\section{Producten}
+Voor een webshop om interessant te zijn moeten er producten worden aangeboden. In deze sectie worden de verdere details over producten uitgelegd.
+
+\subsection{Nieuwe producten}
+Nieuwe producten kunnen enkel in een webshop geplaatst worden door een admin en dit kan op twee verschillende manieren gebeuren, namelijk per product afzonderlijk of in bulk.
+
+\subsubsection{Individueel product}
+Het aanmaken van een nieuw product kan individueel gebeuren. Hiervoor is een pagina voorzien om details over het product in te vullen. Deze details bestaan uit: \textit{een titel, omschrijving, maat, kleur en prijs}. Hoewel de meeste webshops ook afbeeldingen van de producten laten zien, is dat voor de opdracht niet nodig. Heb je een extra uitdaging nodig, dan mag je dit gerust ook implementeren. Naast het toevoegen van een product kan een bestaand product ook gewijzigd worden.
+
+\subsubsection{Bulk producten}
+Naast individuele product upload is het ook mogelijk om producten in bulk te uploaden. Hiervoor zal de admin een .csv bestand uploaden dat al de details van de nieuwe producten bevat. Gebruik hiervoor bijgevoegd products.csv bestand met enkele voorbeeldproducten.
+\\
+\\
+\textit{\textbf{Tip:} \href{https://phoenixframework.readme.io/v0.14.0/docs/file-uploads}{Files uploaden}}
+
+
+\subsection{Verwijderen van producten}
+Oude producten moeten ook verwijdert kunnen worden, uiteraard is deze functionaliteit enkel beschikbaar voor admins. Het verwijderen van producten gebeurd vanaf een overzichtspagina waardat een admin in lijst vorm een overzicht heeft van al de beschikbare producten.
+
+\subsection{Zoeken van een product}
+Op de webshop is er een overzichtspagina waar dat gasten een overzicht krijgen van de beschikbare producten. In dit overzicht moet de titel, maat, kleur en prijs van het product direct zichtbaar zijn. De overige productinformatie moet is zichtbaar in het detailoverzicht \ref{subsection:detail_product}. Verder moeten gebruikers op deze pagina efficient op zoek kunnen gaan naar een product dat ze willen bestellen. Dit kan gebeuren aan de hand van filters. Er wordt verwacht te kunnen zoeken op naam, maat, kleur een min/max-prijs. 
+\\
+\\
+\textit{\textbf{Tip:} \href{https://hexdocs.pm/ecto/Ecto.Query.API.html}{Gebruik de like functionaliteit om te queries uit te voeren op titel}}
+
+\subsection{Details product}
+\label{subsection:detail_product}
+Als de gebruiker op een artikel in de overzichtspagina drukt moeten de details van dit product worden weergegeven. Hier moet al de beschikbare informatie over het product zichtbaar zijn en kan de gebruiker het product in zijn winkelmandje plaatsen. \ref{subsection:winkelmandje}
+
+\section{Bestelling}
+\subsection{Winkelmandje}
+\label{subsection:winkelmandje}
+Iedereen kent de functionaliteit van een winkelmandje wel, je houdt de producten tijdelijk bij zodat je verder kunt winkelen en alles op het einde in één keer kunt betalen. Dat is ook exact het doel van een winkelmandje op een webshop. Op de webshop moet er enkel voor geregistreerde gebruikers een winkelmandje zijn. Ook als de pagina wordt afgesloten moet het winkelmandje gevuld blijven zodat als de gebruiker opnieuw naar de webshop gaat deze producten niet opnieuw meer moet toevoegen. Tot slot moet er voor de gebruiker de optie zijn om zijn volledig winkelmandje te bekijken (inclusief subprijzen, totaal prijs en product informatie) en producten er uit te verwijderen. Het winkelmandje mag worden opgeslagen in de database, een alternatief is het gebruik van cookies maar dit komt nauwelijks aan bod in de cursus.
+
+\subsection{Aankopen}
+Het aankoopproces is vereenvoudigd in vergelijking met een volledig functionele webshop. Zo moet er, enkel voor geregistreerde gebruikers, bij het overzicht van je winkelmandje is een knop met de functionaliteit 'betalen'. Gasten moeten eerst een account aanmaken voordat deze knop beschikbaar is, geef hiervoor een melding aan gastgebruikers. Zodra er op deze knop wordt gedrukt, wordt het winkelmandje van de gebruiker leeg gemaakt, krijgt de gebruiker een mail (opnieuw moet deze mail in de gekozen taal van de gebruiker) met de bestelde producten en verschijnt er een 'bedankt voor je bestelling'-pagina. Het effectief betalen van je bestelling is dus niet nodig.
+
+\subsection{Bestelhistoriek}
+Geregistreerde gebruikers kunnen hun eigen reeds geplaatste bestellingen raadplegen. Hier moeten de bestelde producten met hun informatie en prijzen te vinden zijn samen met de totaalprijs, datum en tijdstip van de bestelling. Let er hier bij op dat een prijswijziging van een product geen wijziging in de bestelhistoriek veroorzaakt. Voorkom dit probleem op een intelligente manier.
+
+
+\section{Overige functionaliteiten}
+\subsection{Talen}
+De pagina waar dat een gebruiker zich kan registreren moet mogelijk zijn in 2 talen. Dit betekend dat ook foutmeldingen correct vertaald moeten worden op deze pagina. Verder is het niet nodig om andere pagina's te vertalen voor het project. Daarnaast moet iedere mail naar de gebruiker automatisch verstuurd worden in de ingestelde taal waarop de website bezocht wordt door deze gebruiker.
+
+\section{API}
+Met een API kan een andere applicatie interactie aangaan met de webshop. 
+\\
+\\
+\textit{\textbf{Tip:} gebruik \href{https://www.postman.com/downloads/}{Postman} voor het testen van je API. Het is \underline{\textbf{verplicht}} je postman scripts te exporteren en mee in te leveren met een correcte configuratie! Test of alles correct werkt nadat je je script opnieuw hebt geimporteerd. Een niet werkend script resulteerd in een 0 op het API onderdeel.}
+
+\subsection{Publieke API}
+Er moet een API beschikbaar moeten zijn voor het raadplegen van producten. Zowel een overzicht van alle producten als individuele informatie van een product kunnen opgevraagd worden via een API in json formaat. Verder is het niet nodig om publieke API routes beschikbaar te maken.
+
+\subsection{Admin API}
+Naast publieke API routes zijn er ook afgeschermde API routes voor admins. Voordat een admin hier gebruik van kan maken zal deze via de browser een API-key moeten aanmaken. Het toevoegen van deze API-key in een unieke API-header genaamd \textbf{webshop-api-key} zal ervoor moeten zorgen dat er bepaalde admin functionaliteiten beschikbaar zijn. Zo moet de admin via de API een overzicht kunnen opvragen van al de geregistreerde gebruikers en voor een specifieke gebruiker zijn bestelhistoriek kunnen opvragen. De resultaten moeten opnieuw als json formaat doorgestuurd worden.
+\\
+\\
+\textit{\textbf{Tip:} De API-key mag een random string zijn, gebruik hiervoor \href{https://hex.pm/packages/secure_random}{secure random} net zoals unieke registratielink tijdens het registereren van een account.}
+
+
+\section{Vormgeving en Layout}
+De vormgeving en layout zijn volledig zelf te bepalen, ben hierbij creatief maar denk tegelijk ook functioneel en plaats geen knoppen op onlogische plaatsen. Laat je gerust inspireren door bestaande webshops maar pleeg geen plagiaat op de layout! 
+
+\end{document}
