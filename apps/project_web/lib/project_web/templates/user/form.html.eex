@@ -41,6 +41,10 @@
 <%= text_input f, :number %>
 <%= error_tag f, :number %>
 
+<%= label f, :role %>
+<%= select f, :role, @acceptable_roles %>
+<%= error_tag f, :role %>
+
 <div>
     <%= submit "Save" %>
 </div>

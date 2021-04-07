@@ -19,6 +19,10 @@
           <li><%= link "Home", to: Routes.page_path(@conn, :index)  %></li>
           <li><%= link "Register", to: Routes.user_path(@conn, :new)  %></li>
           <li><%= link "Overview", to: Routes.user_path(@conn, :overview)  %></li>
+          <li><a href="<%= Routes.session_path(@conn, :new) %>">Login</a></li>
+          <li><a href="<%= Routes.session_path(@conn, :logout) %>">Logout</a></li>
+          <li><a href="/user_scope">User scope</a></li>
+          <li><a href="/admin">Admin scope</a></li>
 
         </ul>
       </nav>

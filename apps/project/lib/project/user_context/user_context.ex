@@ -29,4 +29,23 @@ defmodule Project.UserContext do
 
   @doc "Delete a user"
   def delete_user(%User{} = user), do: Repo.delete(user)
+
+  defdelegate get_acceptable_roles(), to: User
+
+  def authenticate_user(email, plain_text_password) do
+    case Repo.get_by(User, email: email) do
+      nil ->
+        Argon2.no_user_verify()
+        {:error, :invalid_credentials}
+
+      user ->
+        if Argon2.verify_pass(plain_text_password, user.hashed_password) do
+          {:ok, user}
+        else
+          {:error, :invalid_credentials}
+        end
+    end
+  end
+
+  def get_user(id), do: Repo.get(User, id)
 end

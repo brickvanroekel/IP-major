@@ -1,0 +1,11 @@
+{application,project,
+             [{applications,[kernel,stdlib,elixir,logger,runtime_tools,
+                             phoenix_pubsub,ecto_sql,myxql,jason,
+                             argon2_elixir,guardian]},
+              {description,"project"},
+              {modules,['Elixir.Project','Elixir.Project.Application',
+                        'Elixir.Project.Repo','Elixir.Project.UserContext',
+                        'Elixir.Project.UserContext.User']},
+              {registered,[]},
+              {vsn,"0.1.0"},
+              {mod,{'Elixir.Project.Application',[]}}]}.

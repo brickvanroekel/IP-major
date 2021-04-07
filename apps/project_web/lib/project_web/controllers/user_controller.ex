@@ -6,7 +6,8 @@ defmodule ProjectWeb.UserController do
 
   def new(conn, _parameters) do
     changeset = UserContext.change_user(%User{})
-    render(conn, "register.html", changeset: changeset)
+    roles = UserContext.get_acceptable_roles()
+    render(conn, "register.html", changeset: changeset,  acceptable_roles: roles)
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -34,7 +35,8 @@ defmodule ProjectWeb.UserController do
   def edit(conn, %{"user_id" => id}) do
     user = UserContext.get_user!(id)
     changeset = UserContext.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+    roles = UserContext.get_acceptable_roles()
+    render(conn, "edit.html", user: user, changeset: changeset, acceptable_roles: roles)
   end
 
   def update(conn, %{"user_id" => id, "user" => user_params}) do
