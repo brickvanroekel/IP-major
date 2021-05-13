@@ -24,6 +24,10 @@ defmodule ProjectWeb.Router do
     post "/login", SessionController, :login
     get "/logout", SessionController, :logout
 
+    get "/products", ProductController, :overview
+    get "/products/:product_id", ProductController, :show
+
+
   end
 
   scope "/", ProjectWeb do
@@ -44,6 +48,15 @@ defmodule ProjectWeb.Router do
     put "/users/:user_id", UserController, :update
     patch "/users/:user_id", UserController, :update
     delete "/users/:user_id", UserController, :delete
+
+    get "/products/new", ProductController, :new
+    post "/products", ProductController, :create
+
+    get "/products/:product_id/edit", ProductController, :edit
+    put "/products/:product_id", ProductController, :update
+    patch "/products/:product_id", ProductController, :update
+    delete "/products/:product_id", ProductController, :delete
+
   end
 
   # Other scopes may use custom stacks.

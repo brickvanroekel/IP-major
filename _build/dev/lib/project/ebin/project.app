@@ -4,6 +4,8 @@
                              guardian]},
               {description,"project"},
               {modules,['Elixir.Project','Elixir.Project.Application',
+                        'Elixir.Project.ProductContext',
+                        'Elixir.Project.ProductContext.Product',
                         'Elixir.Project.Repo','Elixir.Project.UserContext',
                         'Elixir.Project.UserContext.User']},
               {registered,[]},

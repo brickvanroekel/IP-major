@@ -16,8 +16,10 @@
       <nav role="navigation">
         <ul>
           <li><%= link "Home", to: Routes.page_path(@conn, :index)  %></li>
-          <li><%= link "Register", to: Routes.user_path(@conn, :new)  %></li>
-          <li><%= link "Overview", to: Routes.user_path(@conn, :overview)  %></li>
+          <li><%= link "Register User", to: Routes.user_path(@conn, :new)  %></li>
+          <li><%= link "Users Overview", to: Routes.user_path(@conn, :overview)  %></li>
+          <li><%= link "Register Product", to: Routes.product_path(@conn, :new)  %></li>
+          <li><%= link "Products Overview", to: Routes.product_path(@conn, :overview)  %></li>
           <li><a href="/user_scope">User scope</a></li>
           <li><a href="/admin">Admin scope</a></li>
         </ul>

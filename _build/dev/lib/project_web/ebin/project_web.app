@@ -18,6 +18,8 @@
                         'Elixir.ProjectWeb.PageView',
                         'Elixir.ProjectWeb.Pipeline',
                         'Elixir.ProjectWeb.Plugs.AuthorizationPlug',
+                        'Elixir.ProjectWeb.ProductController',
+                        'Elixir.ProjectWeb.ProductView',
                         'Elixir.ProjectWeb.Router',
                         'Elixir.ProjectWeb.Router.Helpers',
                         'Elixir.ProjectWeb.SessionController',

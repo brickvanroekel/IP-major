@@ -1,0 +1,16 @@
+<h1>Show Product details</h1>
+
+<ul>
+    <li>
+        <strong>Title:</strong>
+        <%= @user.title %>
+    </li>
+
+    <li>
+        <strong>Description:</strong>
+        <%= @user.description %>
+    </li>
+
+</ul>
+
+<%= link "Back", to: Routes.product_path(@conn, :overview) %>
