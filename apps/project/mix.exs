@@ -41,7 +41,8 @@ defmodule Project.MixProject do
       {:myxql, ">= 0.0.0"},
       {:jason, "~> 1.0"},
       {:argon2_elixir, "~> 2.2"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:csv, "~> 2.4"},
     ]
   end
 
