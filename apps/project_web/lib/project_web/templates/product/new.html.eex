@@ -2,6 +2,6 @@
 
 <%= render "form.html", Map.put(assigns, :action, Routes.product_path(@conn, :create)) %>
 
-<%= render "bulkform.html", Map.put(assigns, :action, Routes.product_path(@conn, :create)) %>
+<%= render "bulkform.html", changeset: @changeset, action: Routes.product_path(@conn, :createBulk) %>
 
 <span><%= link "Back", to: Routes.product_path(@conn, :overview) %></span>
