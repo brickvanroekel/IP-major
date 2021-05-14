@@ -24,7 +24,14 @@ defmodule ProjectWeb.ProductController do
   end
 
   def createBulk(conn, %{"product" => product_params}) do
-    IO.inspect product_params
+    product_params["file"].path
+    |> File.stream!()
+    |> CSV.decode!
+    |> Enum.each(fn(product) -> Product.changeset(%Product{}, %{title: Enum.at(product, 0), description: Enum.at(product, 1), size: Enum.at(product, 2), color: Enum.at(product, 3), price: Enum.at(product, 4)})
+    |> Repo.insert() end)
+    conn
+    |> put_flash(:info, "Imported")
+    |> redirect(to: Routes.product_path(conn, :overview))
   end
 
   def overview(conn, _params) do
