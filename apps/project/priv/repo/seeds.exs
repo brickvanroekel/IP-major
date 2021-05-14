@@ -13,4 +13,4 @@
 
 {:ok, _cs} = Project.UserContext.create_user(%{"password" => "t", "role" => "Admin", "first_name" => "test", "last_name" => "admin", "email" => "admin@test.com", "country" => "BE", "city" => "Leuven", "postal_code" => "3000", "street" => "Tiensestraat", "number" => "200"})
 
-{:ok, _cs} = Project.ProductContext.create_product(%{"title" => "Schoen", "description" => "mooie schoen", "size" => "groot", "price" => 10.50, "stock" => 10, "color" => "groen"})
+{:ok, _cs} = Project.ProductContext.create_product(%{"title" => "Schoen", "description" => "mooie schoen", "size" => "groot", "color" => "groen", "price" => 10.50, })

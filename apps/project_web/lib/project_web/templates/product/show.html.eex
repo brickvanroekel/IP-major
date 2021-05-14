@@ -3,12 +3,12 @@
 <ul>
     <li>
         <strong>Title:</strong>
-        <%= @user.title %>
+        <%= @product.title %>
     </li>
 
     <li>
         <strong>Description:</strong>
-        <%= @user.description %>
+        <%= @product.description %>
     </li>
 
 </ul>

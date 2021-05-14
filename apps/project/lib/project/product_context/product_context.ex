@@ -17,13 +17,29 @@ defmodule Project.ProductContext do
   @doc "Returns a specific product or raises an error"
   def get_product!(id), do: Repo.get!(Product, id)
 
-  @doc "Returns all products in the system"
-  def list_products, do: Repo.all(Product)
+  @doc "Returns all products equal to the search term"
+  def list_products(params) do
+    search_term = get_in(params, ["query"])
+
+    Product
+    |> Product.search(search_term)
+    |> Repo.all()
+  end
+
+  @doc "Return products between a min and max price"
+  def filter_products(params) do
+    min = get_in(params, ["min"])
+    max = get_in(params, ["max"])
+
+    Product
+    |> Product.filter(min,max)
+    |> Repo.all()
+  end
 
   @doc "Update an existing product with external attributes"
   def update_product(%Product{} = product, attrs) do
     product
-    |> product.changeset(attrs)
+    |> Product.changeset(attrs)
     |> Repo.update()
   end
 

@@ -25,8 +25,8 @@ defmodule ProjectWeb.Router do
     get "/logout", SessionController, :logout
 
     get "/products", ProductController, :overview
+    get "/products/filter", ProductController, :filter
     get "/products/:product_id", ProductController, :show
-
 
   end
 

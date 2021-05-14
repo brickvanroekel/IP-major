@@ -15,7 +15,7 @@ defmodule ProjectWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User #{user.first_name} #{user.last_name} created successfully.")
-        |> redirect(to: Routes.user_path(conn, :new))
+        |> redirect(to: Routes.user_path(conn, :overview))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "register.html", changeset: changeset)

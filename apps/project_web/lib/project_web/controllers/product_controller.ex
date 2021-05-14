@@ -4,6 +4,7 @@ defmodule ProjectWeb.ProductController do
   alias Project.UserContext
   alias Project.ProductContext
   alias Project.ProductContext.Product
+  alias Project.Repo
 
   def new(conn, _parameters) do
     changeset = ProductContext.change_product(%Product{})
@@ -16,7 +17,7 @@ defmodule ProjectWeb.ProductController do
       {:ok, product} ->
         conn
         |> put_flash(:info, "Product #{product.title} created successfully.")
-        |> redirect(to: Routes.product_path(conn, :new))
+        |> redirect(to: Routes.product_path(conn, :overview))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -34,8 +35,13 @@ defmodule ProjectWeb.ProductController do
     |> redirect(to: Routes.product_path(conn, :overview))
   end
 
-  def overview(conn, _params) do
-    products = ProductContext.list_products()
+  def overview(conn, params) do
+    products = ProductContext.list_products(params)
+    render(conn, "overview.html", products: products)
+  end
+
+  def filter(conn ,params) do
+    products = ProductContext.filter_products(params)
     render(conn, "overview.html", products: products)
   end
 

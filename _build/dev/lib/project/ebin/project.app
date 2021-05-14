@@ -1,6 +1,6 @@
 {application,project,
              [{applications,[kernel,stdlib,elixir,logger,runtime_tools,jason,
-                             argon2_elixir,phoenix_pubsub,myxql,ecto_sql,
+                             argon2_elixir,csv,phoenix_pubsub,myxql,ecto_sql,
                              guardian]},
               {description,"project"},
               {modules,['Elixir.Project','Elixir.Project.Application',
