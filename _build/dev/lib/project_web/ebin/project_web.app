@@ -6,6 +6,7 @@
                              project,phoenix_ecto]},
               {description,"project_web"},
               {modules,['Elixir.ProjectWeb','Elixir.ProjectWeb.Application',
+                        'Elixir.ProjectWeb.CartController',
                         'Elixir.ProjectWeb.Endpoint',
                         'Elixir.ProjectWeb.ErrorHandler',
                         'Elixir.ProjectWeb.ErrorHelpers',

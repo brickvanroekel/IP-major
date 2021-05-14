@@ -37,6 +37,9 @@ defmodule ProjectWeb.Router do
 
     get "/users", UserController, :overview
     get "/users/:user_id", UserController, :show
+
+    resources "/cart", CartController, only: [:update, :delete]
+    #put "/cart/:product_id", CartController, :update
   end
 
   scope "/admin", ProjectWeb do

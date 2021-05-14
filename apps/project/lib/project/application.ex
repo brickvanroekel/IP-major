@@ -9,8 +9,11 @@ defmodule Project.Application do
     children = [
       # Start the Ecto repository
       Project.Repo,
+
+      Project.Workers.CartAgent,
       # Start the PubSub system
       {Phoenix.PubSub, name: Project.PubSub}
+
       # Start a worker by calling: Project.Worker.start_link(arg)
       # {Project.Worker, arg}
     ]

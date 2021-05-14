@@ -20,8 +20,7 @@
           <li><%= link "Users Overview", to: Routes.user_path(@conn, :overview)  %></li>
           <li><%= link "Register Product", to: Routes.product_path(@conn, :new)  %></li>
           <li><%= link "Products Overview", to: Routes.product_path(@conn, :overview)  %></li>
-          <li><a href="/user_scope">User scope</a></li>
-          <li><a href="/admin">Admin scope</a></li>
+          <%= cart_item_count(@conn) %> item(s) in your cart
         </ul>
       </nav>
       <a href="https://phoenixframework.org/" class="phx-logo">

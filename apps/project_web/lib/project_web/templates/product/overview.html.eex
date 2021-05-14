@@ -38,8 +38,8 @@
             <td>
                 <span><%= link "Edit", to: Routes.product_path(@conn, :edit, product) %></span>
             </td>
-            <td><span><%= link "Delete", to: Routes.product_path(@conn, :delete, product),
-        method: :delete, data: [confirm: "Are you sure?"] %></span></td>
+            <td><%= cart_link(@conn, product) %></td>
+            <td><span><%= link "Delete", to: Routes.product_path(@conn, :delete, product), method: :delete, data: [confirm: "Are you sure?"] %></span></td>
 
         </tr>
         <% end %>
