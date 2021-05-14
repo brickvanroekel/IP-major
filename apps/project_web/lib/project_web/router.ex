@@ -47,14 +47,17 @@ defmodule ProjectWeb.Router do
     get "/users/:user_id/edit", UserController, :edit
     put "/users/:user_id", UserController, :update
     patch "/users/:user_id", UserController, :update
+    get "/users/:user_id/", UserController, :delete
     delete "/users/:user_id", UserController, :delete
 
     get "/products/new", ProductController, :new
     post "/products", ProductController, :create
+    post "/productsBulk", ProductController, :createBulk
 
     get "/products/:product_id/edit", ProductController, :edit
     put "/products/:product_id", ProductController, :update
     patch "/products/:product_id", ProductController, :update
+    get "/products/:product_id/", ProductController, :delete
     delete "/products/:product_id", ProductController, :delete
 
   end
