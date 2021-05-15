@@ -3,7 +3,7 @@ defmodule ProjectWeb.CartController do
 
   import Guardian.Plug
   alias Project.ProductContext.Product
-  alias Project.ProductContext
+  alias Project.{ProductContext, Carts}
   alias Project.Workers.CartAgent
 
 
@@ -11,7 +11,7 @@ defmodule ProjectWeb.CartController do
   def update(conn, %{"id" => id}) do
       current_user = Guardian.Plug.current_resource(conn)
       product = ProductContext.get_product!(id)
-      CartAgent.add_item(current_user.email, product)
+      Carts.add(current_user.email, product)
 
       conn
       |> put_flash(:info, "Product added to your cart")

@@ -10,7 +10,8 @@ defmodule Project.Application do
       # Start the Ecto repository
       Project.Repo,
 
-      Project.Workers.CartAgent,
+      Project.Workers.CartSupervisor,
+      {Registry, [keys: :unique, name: :cart_registry]},
       # Start the PubSub system
       {Phoenix.PubSub, name: Project.PubSub}
 

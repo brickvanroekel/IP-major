@@ -1,7 +1,7 @@
 defmodule ProjectWeb.ProductView do
   use ProjectWeb, :view
 
-  alias Project.Workers.CartAgent
+  alias Project.Carts
 
   def cart_link(conn, product) do
     current_user = Guardian.Plug.current_resource(conn)
@@ -19,7 +19,7 @@ defmodule ProjectWeb.ProductView do
   end
 
   defp existing_ids(email) do
-    case CartAgent.get_cart(email) do
+    case Carts.get(email) do
       nil ->
         []
 
