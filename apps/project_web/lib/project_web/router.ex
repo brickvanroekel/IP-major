@@ -13,6 +13,10 @@ defmodule ProjectWeb.Router do
     plug :accepts, ["json"]
   end
 
+  if Mix.env == :dev do
+   forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
+
   scope "/", ProjectWeb do
     pipe_through [:browser, :auth]
 
@@ -38,8 +42,12 @@ defmodule ProjectWeb.Router do
     get "/users", UserController, :overview
     get "/users/:user_id", UserController, :show
 
-    resources "/cart", CartController, only: [:update, :delete]
-    #put "/cart/:product_id", CartController, :update
+    get "/cart", CartController, :show
+    get "/cartOrder", CartController, :order
+    resources "/cart", CartController, only: [:update, :delete, :show]
+
+    get "/order", OrderController, :show
+
   end
 
   scope "/admin", ProjectWeb do
@@ -65,10 +73,14 @@ defmodule ProjectWeb.Router do
 
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ProjectWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", ProjectWeb do
+    pipe_through :api
+
+    resources "/products", Api.ProductController
+
+  end
+
+
 
   # Enables LiveDashboard only for development
   #

@@ -12,5 +12,4 @@ defmodule ProjectWeb.PageController do
   def admin_index(conn, _params) do
     render(conn, "index.html", role: "admins")
   end
-
 end

@@ -3,6 +3,7 @@ defmodule ProjectWeb.UserController do
 
   alias Project.UserContext
   alias Project.UserContext.User
+  alias Project.{Mailer, Email}
 
   def new(conn, _parameters) do
     changeset = UserContext.change_user(%User{})
@@ -10,11 +11,16 @@ defmodule ProjectWeb.UserController do
     render(conn, "register.html", changeset: changeset,  acceptable_roles: roles)
   end
 
+  defp send_registration_notification(user) do
+    Email.register_email(user) |> Mailer.deliver_later()
+  end
+
   def create(conn, %{"user" => user_params}) do
     case UserContext.create_user(user_params) do
       {:ok, user} ->
+        send_registration_notification(user)
         conn
-        |> put_flash(:info, "User #{user.first_name} #{user.last_name} created successfully.")
+        |> put_flash(:info, "User #{user.first_name} #{user.last_name} created successfully! Confirm your email.")
         |> redirect(to: Routes.user_path(conn, :overview))
 
       {:error, %Ecto.Changeset{} = changeset} ->

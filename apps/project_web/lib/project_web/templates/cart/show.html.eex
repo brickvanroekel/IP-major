@@ -1,27 +1,30 @@
 <h1>Shopping Cart</h1>
-<table>
-    <thead>
-        <tr>
-            <th>title</th>
-            <th>size</th>
-            <th>color</th>
-            <th>price</th>
-        </tr>
-    </thead>
-    <tbody>
-        <%= for product <- @products do %>
-        <tr>
-            <td><%= product.title %></td>
-            <td><%= product.size %></td>
-            <td><%= product.color %></td>
-            <td><%= product.price %></td>
+<%= if length(@products) > 0 do%>
+    <table>
+        <thead>
+            <tr>
+                <th>title</th>
+                <th>size</th>
+                <th>color</th>
+                <th>price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%= for product <- @products do %>
+            <tr>
+                <td><%= product.title %></td>
+                <td><%= product.size %></td>
+                <td><%= product.color %></td>
+                <td><%= product.price %></td>
 
-            <td><span><%= link "Delete", to: Routes.cart_path(@conn, :delete, product),
-        method: :delete, data: [confirm: "Are you sure?"] %></span></td>
+                <td><span><%= link "Delete", to: Routes.cart_path(@conn, :delete, product.id),method: :delete, data: [confirm: "Are you sure?"] %></span></td>
 
-        </tr>
-        <% end %>
-    </tbody>
-</table>
-
-<%= link "Order", to: Routes.cart_path(@conn, :order) %>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <p>Total: <%= @total_price %></p>
+    <span><%= link "Order", to: Routes.cart_path(@conn, :order)%></span>
+<% else %>
+    <p>No products in your shopping cart</p>
+<% end %>

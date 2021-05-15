@@ -3,8 +3,9 @@ defmodule ProjectWeb.CartController do
 
   import Guardian.Plug
   alias Project.ProductContext.Product
-  alias Project.{ProductContext, Carts}
+  alias Project.{ProductContext, Carts, OrderContext}
   alias Project.Workers.CartAgent
+  alias Project.{Mailer, Email}
 
 
 
@@ -28,7 +29,36 @@ defmodule ProjectWeb.CartController do
     |> redirect(to: Routes.product_path(conn, :overview))
   end
 
-  #def show(conn, _params) do
-    #render(conn, "show.html", order: conn.assigns.current_order)
-  #end
+  def show(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
+    products = Carts.get(current_user.email)
+    case products do
+      [] ->
+        render(conn, "show.html", products: products)
+      products ->
+        total_price = total_price(products)
+        render(conn, "show.html", products: products, total_price: total_price)
+    end
+  end
+
+  def total_price(products) do
+    Enum.reduce(products, fn product, acc ->
+      %{price: Decimal.add(product.price,acc.price)}
+    end)
+    |> Map.get(:price)
+  end
+
+  def order(conn, _params) do
+    current_user = Guardian.Plug.current_resource(conn)
+    products = Carts.get(current_user.email)
+    send_order_notification(products, current_user)
+    attrs = %{"total_price" => total_price(products)}
+    OrderContext.create_order(attrs)
+    Carts.empty(current_user.email)
+    render(conn, "thanks.html")
+  end
+
+  defp send_order_notification(cart, current_user) do
+    Email.order_email(cart, current_user) |> Mailer.deliver_later()
+  end
 end

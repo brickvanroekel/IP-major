@@ -14,6 +14,7 @@ defmodule Project.Repo.Migrations.CreateUsers do
       add :number, :string, null: false
       add :role, :string, null: false
 
+
       timestamps()
     end
 

@@ -21,6 +21,8 @@
           <li><%= link "Register Product", to: Routes.product_path(@conn, :new)  %></li>
           <li><%= link "Products Overview", to: Routes.product_path(@conn, :overview)  %></li>
           <%= cart_item_count(@conn) %> item(s) in your cart
+          <li><%= link "Show cart", to: Routes.cart_path(@conn, :show)  %></li>
+          <li><%= link "Show Orders", to: Routes.order_path(@conn, :show)  %></li>
         </ul>
       </nav>
       <a href="https://phoenixframework.org/" class="phx-logo">

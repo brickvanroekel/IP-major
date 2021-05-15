@@ -1,0 +1,28 @@
+<h1>Order History</h1>
+<%= if length(@orders) > 0 do%>
+    <%= for order <- @orders do %>
+        <table>
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>size</th>
+                    <th>color</th>
+                    <th>price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= for product <- order.products do %>
+                <tr>
+                    <td><%= product.title %></td>
+                    <td><%= product.size %></td>
+                    <td><%= product.color %></td>
+                    <td><%= product.price %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <p>Total: <%= order.total_price %></p>
+    <% end %>
+<% else %>
+    <p>You haven't placed any orders yet</p>
+<% end %>

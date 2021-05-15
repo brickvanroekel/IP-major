@@ -23,7 +23,7 @@ defmodule Project.MixProject do
   def application do
     [
       mod: {Project.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :bamboo]
     ]
   end
 
@@ -43,6 +43,7 @@ defmodule Project.MixProject do
       {:argon2_elixir, "~> 2.2"},
       {:guardian, "~> 2.0"},
       {:csv, "~> 2.4"},
+      {:bamboo, "~>0.8"}
     ]
   end
 

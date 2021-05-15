@@ -30,6 +30,19 @@ defmodule Project.Workers.CartAgent do
     end)
   end
 
+  def empty_cart(cart_id) do
+    empty_cart =
+      cart_id
+      |> get_cart()
+      |> Enum.reject(fn(cart_item) ->
+        true
+      end)
+
+    Agent.update(via_tuple(cart_id), fn(_state) ->
+      empty_cart
+    end)
+  end
+
   defp via_tuple(cart_id) do
     {:via, Registry, {:cart_registry, cart_id} }
   end

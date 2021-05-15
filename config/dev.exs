@@ -69,6 +69,9 @@ config :project_web, ProjectWeb.Endpoint,
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
+config :project, Project.Mailer,
+  adapter: Bamboo.LocalAdapter
+
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
 

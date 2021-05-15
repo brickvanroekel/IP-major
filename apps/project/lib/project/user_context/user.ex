@@ -2,6 +2,8 @@ defmodule Project.UserContext.User do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Project.OrderContext.Order
+
   @acceptable_roles ["Admin", "User"]
 
   schema "users" do
@@ -16,6 +18,8 @@ defmodule Project.UserContext.User do
     field :street, :string
     field :number, :string
     field :role, :string, default: "User"
+    has_many :orders, Order
+
 
     timestamps()
   end
@@ -28,6 +32,7 @@ defmodule Project.UserContext.User do
     |> cast(attrs, [:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number, :role])
     |> validate_required([:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number, :role])
     |> validate_inclusion(:role, @acceptable_roles)
+    |> cast_assoc(:orders)
     |> unique_constraint(:email, name: :unique_users_index,
       message:
         "E-mail already in use."

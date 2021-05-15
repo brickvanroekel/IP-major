@@ -3,6 +3,7 @@ defmodule Project.ProductContext.Product do
   import Ecto.Changeset
   import Ecto.Query
 
+  alias Project.OrderContext.Order
 
   schema "products" do
     field :color, :string
@@ -10,6 +11,7 @@ defmodule Project.ProductContext.Product do
     field :description, :string
     field :price, :decimal
     field :title, :string
+    many_to_many :orders, Order, join_through: "orders_products"
 
     timestamps()
   end
@@ -19,6 +21,7 @@ defmodule Project.ProductContext.Product do
     product
     |> cast(attrs, [:title, :description, :size, :color, :price])
     |> validate_required([:title, :description, :size, :color, :price])
+    |> cast_assoc(:orders)
     |> unique_constraint(:id, name: :unique_products_index, message:
     "ID already in use.")
   end
