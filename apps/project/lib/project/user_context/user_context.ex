@@ -2,6 +2,8 @@ defmodule Project.UserContext do
   alias __MODULE__.User
   alias Project.Repo
 
+  alias Project.UserContext.ApiKey
+
   @doc "Returns a user changeset"
   def change_user(%User{} = user) do
     user |> User.changeset(%{})
@@ -48,4 +50,24 @@ defmodule Project.UserContext do
   end
 
   def get_user(id), do: Repo.get(User, id)
+
+  def generate_user_api_key(%User{} = user) do
+    key = 10
+      |> :crypto.strong_rand_bytes()
+      |> Base.encode16()
+    user = preload_api_key(user)
+    case user.api_key do
+      nil ->
+        %ApiKey{user_id: user.id}
+      api_key ->
+        api_key
+    end
+    |> ApiKey.changeset(%{key: key})
+    |> Repo.insert_or_update()
+  end
+
+
+  def preload_api_key(user) do
+    Repo.preload(user, :api_key)
+  end
 end

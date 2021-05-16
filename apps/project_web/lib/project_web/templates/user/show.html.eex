@@ -16,5 +16,11 @@
         <%= @user.email %>
     </li>
 </ul>
-
+<%= if @user.api_key do%>
+    Your API key: <%= @user.api_key.key %>
+<% else %>
+    Create an API-key
+<% end %>
+<%= button("Generate API-key", to: Routes.api_key_path(@conn, :create), method: "post") %>
+<br>
 <%= link "Back", to: Routes.user_path(@conn, :overview) %>

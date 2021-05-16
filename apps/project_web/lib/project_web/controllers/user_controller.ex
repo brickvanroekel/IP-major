@@ -5,6 +5,8 @@ defmodule ProjectWeb.UserController do
   alias Project.UserContext.User
   alias Project.{Mailer, Email}
 
+  #plug ProjectWeb.Plugs.CheckAuth
+
   def new(conn, _parameters) do
     changeset = UserContext.change_user(%User{})
     roles = UserContext.get_acceptable_roles()
@@ -34,7 +36,9 @@ defmodule ProjectWeb.UserController do
   end
 
   def show(conn, %{"user_id" => id}) do
-    user = UserContext.get_user!(id)
+    user = id
+    |> UserContext.get_user!()
+    |> UserContext.preload_api_key()
     render(conn, "show.html", user: user)
   end
 

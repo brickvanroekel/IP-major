@@ -61,6 +61,10 @@ defmodule ProjectWeb.Router do
     get "/users/:user_id/", UserController, :delete
     delete "/users/:user_id", UserController, :delete
 
+    #resources "/users", UserController, only: [:show] do
+    resources "/api-keys", ApiKeyController, only: [:create]
+    #end
+
     get "/products/new", ProductController, :new
     post "/products", ProductController, :create
     post "/productsBulk", ProductController, :createBulk

@@ -19,7 +19,7 @@ defmodule Project.UserContext.User do
     field :number, :string
     field :role, :string, default: "User"
     has_many :orders, Order
-
+    has_one :api_key, Project.UserContext.ApiKey
 
     timestamps()
   end
