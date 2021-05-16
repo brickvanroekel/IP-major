@@ -20,6 +20,7 @@ defmodule ProjectWeb.UserController do
       {:ok, user} ->
         send_registration_notification(user)
         conn
+        |> UserContext.set_token_on_user(user)
         |> put_flash(:info, "User #{user.first_name} #{user.last_name} created successfully! Confirm your email.")
         |> redirect(to: Routes.user_path(conn, :overview))
 
@@ -66,5 +67,32 @@ defmodule ProjectWeb.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: Routes.user_path(conn, :overview))
+  end
+
+  def update_verification(conn, %{"id" => token, "user" => verification_attrs}) do
+    user = UserContext.get_user_from_token(token)
+  
+    verification_attrs =
+      Map.merge(verification_attrs, %{"verification_token" => nil, "verification_sent_at" => nil})
+  
+    with true <- UserContext.valid_token?(user.verification_sent_at),
+         {:ok, _updated_user} <- UserContext.update_user(user, pass_attrs) do
+  
+         conn
+         |> put_flash(:info, "Your account has been verified.")
+         |> redirect(to: Routes.session_path(conn, :new))
+  
+    else
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "Problem verifying your account")
+        |> redirect(to: Routes.session_path(conn, :new))
+  
+      false ->
+        conn
+        |> put_flash(:error, "Verification token expired - request new one")
+        |> redirect(to: Routes.session_path(conn, :new))
+  
+    end
   end
 end

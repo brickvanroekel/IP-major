@@ -21,4 +21,11 @@ defmodule Project.Email do
       |> to(user.email)
       |> put_html_layout({ProjectWeb.LayoutView, "email.html"})
     end
+
+    def verification_email(user) do
+      base_email()
+      |> subject("User verification")
+      |> assign(:user, user)
+      |> render("verification.html")
+    end
 end

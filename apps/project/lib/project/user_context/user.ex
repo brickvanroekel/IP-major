@@ -18,6 +18,8 @@ defmodule Project.UserContext.User do
     field :street, :string
     field :number, :string
     field :role, :string, default: "User"
+    field :verification_token, :string
+    field :verification_sent_at, :naive_datetime
     has_many :orders, Order
 
 
@@ -29,7 +31,7 @@ defmodule Project.UserContext.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number, :role])
+    |> cast(attrs, [:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number, :role ,:verification_token, :verification_sent_at])
     |> validate_required([:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number, :role])
     |> validate_inclusion(:role, @acceptable_roles)
     |> cast_assoc(:orders)
