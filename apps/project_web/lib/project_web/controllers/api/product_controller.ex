@@ -1,4 +1,4 @@
-defmodule ProjectWeb.ProductApiController do
+defmodule ProjectWeb.Api.ProductController do
   use ProjectWeb, :controller
 
   alias Project.ProductContext

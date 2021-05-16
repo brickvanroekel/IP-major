@@ -73,10 +73,10 @@ defmodule ProjectWeb.Router do
 
   end
 
-  scope "/api", ProjectWeb do
+  scope "/api", ProjectWeb.Api, as: :api do
     pipe_through :api
 
-    resources "/products", ProductApiController
+    resources "/products", ProductController, only: [:show, :index]
 
   end
 
