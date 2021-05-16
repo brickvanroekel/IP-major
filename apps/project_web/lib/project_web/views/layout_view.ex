@@ -13,6 +13,16 @@ defmodule ProjectWeb.LayoutView do
     end
   end
 
+  def current_role(conn) do
+    current_user = current_user(conn)
+    case current_user.role do
+      "User" ->
+        "user"
+      "Admin" ->
+        "admin"
+    end
+  end
+
   def cart_item_count(conn) do
     current_user = Guardian.Plug.current_resource(conn)
     case current_user do

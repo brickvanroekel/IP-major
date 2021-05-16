@@ -1,7 +1,10 @@
 <section class="container">
-  <a href="<%= Routes.session_path(@conn, :new) %>">Login</a>
+  <%= if current_user(@conn) do%>
+    <a href="<%= Routes.session_path(@conn, :logout) %>">Logout</a>
+  <% else %>
+    <a href="<%= Routes.session_path(@conn, :new) %>">Login</a>
+  <% end %>
   <br>
-  <a href="<%= Routes.session_path(@conn, :logout) %>">Logout</a>
   <section class="row">
   this page is for: <%= @role %>
     <br>
