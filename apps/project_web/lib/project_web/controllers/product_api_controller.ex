@@ -5,7 +5,7 @@ defmodule ProjectWeb.ProductApiController do
   alias Project.ProductContext.Product
 
 
-  def index(conn, _params6) do
+  def index(conn, _params) do
     products = ProductContext.list_api_products()
     render(conn, "index.json", products: products)
   end
