@@ -3,6 +3,16 @@ defmodule ProjectWeb.LayoutView do
 
   alias Project.Carts
 
+  def current_user(conn) do
+    current_user = Guardian.Plug.current_resource(conn)
+    case current_user do
+      nil ->
+        nil
+      current_user ->
+        current_user
+    end
+  end
+
   def cart_item_count(conn) do
     current_user = Guardian.Plug.current_resource(conn)
     case current_user do

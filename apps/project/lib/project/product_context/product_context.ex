@@ -26,6 +26,9 @@ defmodule Project.ProductContext do
     |> Repo.all()
   end
 
+  def list_api_products, do: Repo.all(Product)
+
+
   @doc "Return products between a min and max price"
   def filter_products(params) do
     min = get_in(params, ["min"])

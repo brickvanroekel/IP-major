@@ -1,8 +1,7 @@
 defmodule ProjectWeb.CartController do
   use ProjectWeb, :controller
 
-  import Guardian.Plug
-  alias Project.ProductContext.Product
+
   alias Project.{ProductContext, Carts, OrderContext}
   alias Project.Workers.CartAgent
   alias Project.{Mailer, Email}
