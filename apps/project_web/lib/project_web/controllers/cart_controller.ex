@@ -25,7 +25,7 @@ defmodule ProjectWeb.CartController do
 
     conn
     |> put_flash(:info, "Product removed from your cart")
-    |> redirect(to: Routes.product_path(conn, :overview))
+    |> redirect(to: Routes.cart_path(conn, :show))
   end
 
   def show(conn, _params) do
