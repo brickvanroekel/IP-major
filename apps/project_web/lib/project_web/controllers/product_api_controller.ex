@@ -2,13 +2,15 @@ defmodule ProjectWeb.ProductApiController do
   use ProjectWeb, :controller
 
   alias Project.ProductContext
+  alias Project.ProductContext.Product
 
-  def overview(conn) do
+
+  def index(conn, _params6) do
     products = ProductContext.list_api_products()
-    render(conn, "overview.json", products: products)
+    render(conn, "index.json", products: products)
   end
 
-  def show(conn, %{"product_id" => id}) do
+  def show(conn, %{"id" => id}) do
     product = ProductContext.get_product!(id)
     render(conn, "show.json", product: product)
   end

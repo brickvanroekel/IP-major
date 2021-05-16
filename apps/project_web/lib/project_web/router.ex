@@ -76,8 +76,7 @@ defmodule ProjectWeb.Router do
   scope "/api", ProjectWeb do
     pipe_through :api
 
-    get "/products", ProductApiController, :overview
-    get "/products/:product_id", ProductApiController, :show
+    resources "/products", ProductApiController
 
   end
 
