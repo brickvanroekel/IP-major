@@ -52,6 +52,25 @@ defmodule Project.UserContext do
 
   def get_user(id), do: Repo.get(User, id)
 
+  def set_token_on_user(user) do
+    attrs = %{
+      "verification_token" => SecureRandom.urlsafe_base64(),
+      "verification_sent_at" => NaiveDateTime.utc_now()
+    }
+    user
+    |> User.changeset(attrs)
+    |> Repo.update!()
+  end
+
+  def get_user_from_token(token) do
+    Repo.get_by(User, verification_token: token)
+  end
+
+  def valid_token?(token_sent_at) do
+    current_time = NaiveDateTime.utc_now()
+    Time.diff(current_time, token_sent_at) < 86400
+  end
+  
   def generate_user_api_key(%User{} = user) do
     key = 10
       |> :crypto.strong_rand_bytes()

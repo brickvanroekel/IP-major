@@ -14,11 +14,16 @@ defmodule ProjectWeb.UserController do
   end
 
   defp send_registration_notification(user) do
-    Email.register_email(user) |> Mailer.deliver_later()
+    Email.verification_email(user) |> Mailer.deliver_later()
   end
 
   def create(conn, %{"user" => user_params}) do
-    case UserContext.create_user(user_params) do
+    attrs = %{
+      "verification_token" => SecureRandom.urlsafe_base64(),
+      "verification_sent_at" => NaiveDateTime.utc_now()
+    }
+    
+    case UserContext.create_user(Map.merge(user_params, attrs)) do
       {:ok, user} ->
         send_registration_notification(user)
         conn
@@ -26,7 +31,8 @@ defmodule ProjectWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :overview))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "register.html", changeset: changeset)
+        roles = UserContext.get_acceptable_roles()
+        render(conn, "register.html", changeset: changeset, acceptable_roles: roles)
     end
   end
 
@@ -70,5 +76,32 @@ defmodule ProjectWeb.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: Routes.user_path(conn, :overview))
+  end
+
+  def update_verification(conn, %{"id" => token, "user" => verification_attrs}) do
+    user = UserContext.get_user_from_token(token)
+  
+    verification_attrs =
+      Map.merge(verification_attrs, %{"verification_token" => nil, "verification_sent_at" => nil})
+  
+    with true <- UserContext.valid_token?(user.verification_sent_at),
+         {:ok, _updated_user} <- UserContext.update_user(user, verification_attrs) do
+  
+         conn
+         |> put_flash(:info, "Your account has been verified.")
+         |> redirect(to: Routes.session_path(conn, :new))
+  
+    else
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "Problem verifying your account")
+        |> redirect(to: Routes.session_path(conn, :new))
+  
+      false ->
+        conn
+        |> put_flash(:error, "Verification token expired - request new one")
+        |> redirect(to: Routes.session_path(conn, :new))
+  
+    end
   end
 end

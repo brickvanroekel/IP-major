@@ -46,6 +46,7 @@ defmodule ProjectWeb.Router do
 
     get "/users", UserController, :overview
     get "/users/:user_id", UserController, :show
+    get "/verify", UserController, :update_verification
 
     get "/cart", CartController, :show
     get "/cartOrder", CartController, :order

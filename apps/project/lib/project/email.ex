@@ -1,13 +1,6 @@
 defmodule Project.Email do
   use Bamboo.Phoenix, view: ProjectWeb.EmailView
 
-    def register_email(user) do
-      base_email(user)
-      |> assign(:user, user)
-      |> subject("User Registration")
-      |> render("confirmation_mail.html")
-    end
-
     def order_email(cart,user) do
       base_email(user)
       |> subject("Order confirmation")
@@ -20,5 +13,12 @@ defmodule Project.Email do
       |> from("no-reply@webshop.com")
       |> to(user.email)
       |> put_html_layout({ProjectWeb.LayoutView, "email.html"})
+    end
+
+    def verification_email(user) do
+      base_email(user)
+      |> subject("User verification")
+      |> assign(:user, user)
+      |> render("verification.html")
     end
 end

@@ -1,7 +1,7 @@
 {application,project,
              [{applications,[kernel,stdlib,elixir,logger,runtime_tools,bamboo,
                              jason,argon2_elixir,csv,phoenix_pubsub,myxql,
-                             ecto_sql,guardian]},
+                             ecto_sql,secure_random,guardian]},
               {description,"project"},
               {modules,['Elixir.Project','Elixir.Project.Application',
                         'Elixir.Project.Carts','Elixir.Project.Email',

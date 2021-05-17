@@ -21,5 +21,5 @@ defmodule ProjectWeb.Plugs.ApiAuth do
   end
 
   defp parse_key([]), do: nil
-  defp parse_key(["Apikey " <> key]), do: key
+  defp parse_key([key]), do: key
 end

@@ -52,7 +52,7 @@ defmodule ProjectWeb.CartController do
     products = Carts.get(current_user.email)
     send_order_notification(products, current_user)
     attrs = %{"total_price" => total_price(products)}
-    OrderContext.create_order(attrs)
+    OrderContext.create_order(attrs, products, current_user)
     Carts.empty(current_user.email)
     render(conn, "thanks.html")
   end
