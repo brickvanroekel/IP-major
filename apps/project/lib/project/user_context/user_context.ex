@@ -13,6 +13,8 @@ defmodule Project.UserContext do
   @doc "Creates a user based on some external attributes"
   def create_user(attributes) do
     %User{}
+    |> Repo.preload(:orders)
+    |> Repo.preload(:api_key)
     |> User.changeset(attributes)
     |> Repo.insert()
   end

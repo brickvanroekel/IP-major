@@ -14,5 +14,7 @@ defmodule Project.OrderContext do
     |> Repo.insert()
   end
 
-  def list_orders, do: Repo.all(Order)
+  def list_orders() do
+    Repo.all(Order)
+  end
 end

@@ -1,3 +1,3 @@
-<h1>Password Reset</h1>
-<%= link "Change password",
-  to: Routes.user_url(ProjectWeb.Endpoint, :update_verification, @user.verification_token) %>
+<h1>Account verification</h1>
+<%= link "Verify Account",
+  to: Routes.user_url(ProjectWeb.Endpoint, :update_verification, verification_token: @user.verification_token) %>
