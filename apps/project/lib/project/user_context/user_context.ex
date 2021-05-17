@@ -1,6 +1,7 @@
 defmodule Project.UserContext do
   alias __MODULE__.User
   alias Project.Repo
+  import Ecto.Query, warn: false
 
   alias Project.UserContext.ApiKey
 
@@ -69,5 +70,13 @@ defmodule Project.UserContext do
 
   def preload_api_key(user) do
     Repo.preload(user, :api_key)
+  end
+
+
+  def api_key_exists?(key) when is_nil(key), do: false
+  def api_key_exists?(key) do
+    qry = from api_key in ApiKey,
+              where: api_key.key == ^key
+    Repo.exists?(qry)
   end
 end
