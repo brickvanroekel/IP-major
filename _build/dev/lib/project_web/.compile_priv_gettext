@@ -1,1 +1,4 @@
+priv/gettext/en/LC_MESSAGES/default.po
 priv/gettext/en/LC_MESSAGES/errors.po
+priv/gettext/nl/LC_MESSAGES/default.po
+priv/gettext/nl/LC_MESSAGES/errors.po
