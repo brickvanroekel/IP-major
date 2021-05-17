@@ -22,7 +22,7 @@ defmodule ProjectWeb do
       use Phoenix.Controller, namespace: ProjectWeb
 
       import Plug.Conn
-      import ProjectWeb.Gettext
+      import I18nTranslations.Gettext
       alias ProjectWeb.Router.Helpers, as: Routes
     end
   end
@@ -54,7 +54,7 @@ defmodule ProjectWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import ProjectWeb.Gettext
+      import I18nTranslations.Gettext
     end
   end
 
@@ -67,7 +67,7 @@ defmodule ProjectWeb do
       import Phoenix.View
 
       import ProjectWeb.ErrorHelpers
-      import ProjectWeb.Gettext
+      import I18nTranslations.Gettext
       alias ProjectWeb.Router.Helpers, as: Routes
     end
   end

@@ -37,9 +37,9 @@ config :project_web, ProjectWeb.Guardian,
   issuer: "project_web",
   secret_key: "ymyW3XKaSaaF6dz8Y/ZvIpX/sz20lLrmO2nVcsKVco1D1y5+7/wRkLxc8I8R6pOK"
 
-config :project_web, ProjectWeb.Gettext,
+config :i18n_translations, I18nTranslations.Gettext,
 locales: ~w(en nl),
-default_locale: "nl"
+default_locale: "en"
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

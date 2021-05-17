@@ -1,4 +1,4 @@
-<p>Thank you for your order!</p>
+<p><%= gettext "Thank you for your order!" %></p>
 <%= for product <- @cart do %>
     <ul>
         <li><%= product.title %> <%= product.size %> <%= product.color %></li>

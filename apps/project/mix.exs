@@ -44,7 +44,8 @@ defmodule Project.MixProject do
       {:guardian, "~> 2.0"},
       {:csv, "~> 2.4"},
       {:bamboo, "~>0.8"},
-      {:secure_random, "~> 0.5"}
+      {:secure_random, "~> 0.5"},
+      {:i18n_translations, in_umbrella: true}
     ]
   end
 

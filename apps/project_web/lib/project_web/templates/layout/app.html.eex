@@ -18,6 +18,7 @@
         <%= if current_role(@conn) == "admin" do%>
           <ul>
           <li><%= link "Home", to: Routes.page_path(@conn, :index)  %></li>
+            <li><%= link "Register User", to: Routes.user_path(@conn, :new)  %></li>
             <li><%= link "Users Overview", to: Routes.user_path(@conn, :overview)  %></li>
             <li><%= link "Register Product", to: Routes.product_path(@conn, :new)  %></li>
             <li><%= link "Products Overview", to: Routes.product_path(@conn, :overview)  %></li>
@@ -43,9 +44,10 @@
         </ul>
       <% end %>
       </nav>
-      <a href="https://phoenixframework.org/" class="phx-logo">
-        <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo" />
-      </a>
+      <ul>
+        <li><%= new_locale @conn, :en, "English" %></li>
+        <li><%= new_locale @conn, :nl, "Nederlands" %></li>
+      </ul>
     </section>
   </header>
   <main role="main" class="container">
