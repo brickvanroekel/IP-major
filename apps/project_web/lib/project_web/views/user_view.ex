@@ -20,4 +20,14 @@ defmodule ProjectWeb.UserView do
         "admin"
     end
   end
+
+  def current_user_key(conn) do
+    current_user = current_user(conn)
+    case current_user.api_key do
+      nil ->
+        nil
+      api_key ->
+        api_key
+    end
+  end
 end

@@ -41,6 +41,7 @@ defmodule ProjectWeb.Router do
 
     get "/users", UserController, :overview
     get "/users/:user_id", UserController, :show
+    get "/verify", UserController, :update_verification
 
     get "/cart", CartController, :show
     get "/cartOrder", CartController, :order
@@ -61,6 +62,10 @@ defmodule ProjectWeb.Router do
     get "/users/:user_id/", UserController, :delete
     delete "/users/:user_id", UserController, :delete
 
+    #resources "/users", UserController, only: [:show] do
+    resources "/api-keys", ApiKeyController, only: [:create]
+    #end
+
     get "/products/new", ProductController, :new
     post "/products", ProductController, :create
     post "/productsBulk", ProductController, :createBulk
@@ -73,10 +78,10 @@ defmodule ProjectWeb.Router do
 
   end
 
-  scope "/api", ProjectWeb do
+  scope "/api", ProjectWeb.Api, as: :api do
     pipe_through :api
 
-    resources "/products", ProductApiController
+    resources "/products", ProductController, only: [:show, :index]
 
   end
 

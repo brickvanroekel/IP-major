@@ -6,15 +6,13 @@ defmodule Project.OrderContext do
     order |> Order.changeset(%{})
   end
 
-  def create_order(attributes) do
+  def create_order(attributes, products, user) do
     %Order{}
-    |> Order.changeset(attributes)
     |> Repo.preload(:products)
+    |> Repo.preload(:user)
+    |> Order.changeset(attributes)
     |> Repo.insert()
   end
 
   def list_orders, do: Repo.all(Order)
-
-
-
 end

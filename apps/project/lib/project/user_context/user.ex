@@ -21,7 +21,7 @@ defmodule Project.UserContext.User do
     field :verification_token, :string
     field :verification_sent_at, :naive_datetime
     has_many :orders, Order
-
+    has_one :api_key, Project.UserContext.ApiKey
 
     timestamps()
   end
