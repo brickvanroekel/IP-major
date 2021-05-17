@@ -13,6 +13,11 @@ defmodule ProjectWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :api_auth do
+    plug :accepts, ["json"]
+    plug ProjectWeb.Plugs.ApiAuth
+  end
+
   if Mix.env == :dev do
    forward "/sent_emails", Bamboo.EmailPreviewPlug
   end
@@ -80,12 +85,12 @@ defmodule ProjectWeb.Router do
 
   scope "/api", ProjectWeb.Api, as: :api do
     pipe_through :api
-
     resources "/products", ProductController, only: [:show, :index]
 
+    pipe_through :api_auth
+    resources "/users", UserController, only: [:index]
+
   end
-
-
 
   # Enables LiveDashboard only for development
   #
