@@ -8,7 +8,7 @@ defmodule ProjectWeb.Plugs.ApiAuth do
 
   def call(conn, _arts) do
     key = conn
-      |> get_req_header("authorization")
+      |> get_req_header("webshop-api-key")
       |> parse_key()
 
     if UserContext.api_key_exists?(key) do
