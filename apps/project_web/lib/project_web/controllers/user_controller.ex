@@ -22,13 +22,13 @@ defmodule ProjectWeb.UserController do
       "verification_token" => SecureRandom.urlsafe_base64(),
       "verification_sent_at" => NaiveDateTime.utc_now()
     }
-    
+
     case UserContext.create_user(Map.merge(user_params, attrs)) do
       {:ok, user} ->
         send_registration_notification(user)
         conn
         |> put_flash(:info, "User #{user.first_name} #{user.last_name} created successfully! Confirm your email.")
-        |> redirect(to: Routes.user_path(conn, :overview))
+        |> redirect(to: Routes.page_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         roles = UserContext.get_acceptable_roles()
@@ -80,28 +80,28 @@ defmodule ProjectWeb.UserController do
 
   def update_verification(conn, %{"verification_token" => token, "user" => verification_attrs}) do
     user = UserContext.get_user_from_token(token)
-  
+
     verification_attrs =
       Map.merge(verification_attrs, %{"verification_token" => nil, "verification_sent_at" => nil})
-  
+
     with true <- UserContext.valid_token?(user.verification_sent_at),
          {:ok, _updated_user} <- UserContext.update_user(user, verification_attrs) do
-  
+
          conn
          |> put_flash(:info, "Your account has been verified.")
          |> redirect(to: Routes.session_path(conn, :new))
-  
+
     else
       {:error, changeset} ->
         conn
         |> put_flash(:error, "Problem verifying your account")
         |> redirect(to: Routes.session_path(conn, :new))
-  
+
       false ->
         conn
         |> put_flash(:error, "Verification token expired - request new one")
         |> redirect(to: Routes.session_path(conn, :new))
-  
+
     end
   end
 end

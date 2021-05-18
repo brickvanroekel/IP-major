@@ -47,5 +47,6 @@
         <% end %>
     </tbody>
 </table>
-
+<%= if current_role(@conn) == "admin" do %>
 <%= link "New product", to: Routes.product_path(@conn, :new) %>
+<% end %>

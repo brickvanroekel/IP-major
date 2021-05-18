@@ -16,11 +16,18 @@
         <%= @user.email %>
     </li>
 </ul>
-<%= if @user.api_key do%>
-    Your API key: <%= @user.api_key.key %>
-<% else %>
-    Create an API-key
+<%= if current_role(@conn) == "admin" do %>
+    <br>
+    <p>Please do <b>NOT</b> generate an api-key before running the Postman scripts. This key is assigned to the Postman GET-request of api/users</p>
+    <br>
+    <p>Note that the request header has to be changed after creating a new key</p>
+    <%= if @user.api_key do%>
+        Your API key: <%= @user.api_key.key %>
+    <% else %>
+        Create an API-key
+    <% end %>
+    <%= button("Generate API-key", to: Routes.api_key_path(@conn, :create), method: "post") %>
 <% end %>
-<%= button("Generate API-key", to: Routes.api_key_path(@conn, :create), method: "post") %>
+
 <br>
 <%= link "Back", to: Routes.user_path(@conn, :overview) %>

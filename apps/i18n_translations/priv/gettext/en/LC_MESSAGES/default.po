@@ -78,10 +78,16 @@ msgstr ""
 
 #, elixir-format
 #: lib/project_web/templates/email/confirmation_mail.html.eex:1
+#: lib/project_web/templates/email/verification.html.eex:1
 msgid "Welcome %{firstname} %{lastname}"
 msgstr ""
 
 #, elixir-format
 #: lib/project_web/templates/user/form.html.eex:20
 msgid "password"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/email/verification.html.eex:2
+msgid "Verify account"
 msgstr ""

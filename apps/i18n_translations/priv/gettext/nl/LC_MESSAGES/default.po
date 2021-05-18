@@ -12,11 +12,6 @@ msgstr ""
 "Plural-Forms: nplurals=2\n"
 
 #, elixir-format
-#: lib/project_web/templates/user/register.html.eex:2
-msgid "%{title}"
-msgstr "Nieuwe gebruiker"
-
-#, elixir-format
 #: lib/project_web/templates/user/form.html.eex:8
 msgid "%{first_name}"
 msgstr "Voornaam"
@@ -27,9 +22,9 @@ msgid "%{last_name}"
 msgstr "Achternaam"
 
 #, elixir-format
-#: lib/project_web/templates/user/form.html.eex:4
-msgid "Oops, something went wrong! Please check the errors below."
-msgstr "Er liep iets mis! Bekijk de errors hieronder"
+#: lib/project_web/templates/user/register.html.eex:2
+msgid "%{title}"
+msgstr "Nieuwe gebruiker"
 
 #, elixir-format
 #: lib/project_web/templates/user/form.html.eex:28
@@ -52,17 +47,22 @@ msgid "Number"
 msgstr "Nummer"
 
 #, elixir-format
+#: lib/project_web/templates/user/form.html.eex:4
+msgid "Oops, something went wrong! Please check the errors below."
+msgstr "Er liep iets mis! Bekijk de errors hieronder"
+
+#, elixir-format
 #: lib/project_web/templates/user/form.html.eex:32
 msgid "Postal code"
 msgstr "Postcode"
 
 #, elixir-format
-#: lib/project_web/templates/user/form.html.eex:44
+#: lib/project_web/templates/user/form.html.eex:46
 msgid "Role"
 msgstr "Rol"
 
 #, elixir-format
-#: lib/project_web/templates/user/form.html.eex:49
+#: lib/project_web/templates/user/form.html.eex:53
 msgid "Save"
 msgstr "Opslaan"
 
@@ -72,16 +72,22 @@ msgid "Street"
 msgstr "Straat"
 
 #, elixir-format
+#: lib/project_web/templates/email/order_confirmation.html.eex:1
+msgid "Thank you for your order!"
+msgstr "Bedankt voor uw bestelling!"
+
+#, elixir-format
+#: lib/project_web/templates/email/confirmation_mail.html.eex:1
+#: lib/project_web/templates/email/verification.html.eex:1
+msgid "Welcome %{firstname} %{lastname}"
+msgstr "Welkom %{firstname} %{lastname}"
+
+#, elixir-format
 #: lib/project_web/templates/user/form.html.eex:20
 msgid "password"
 msgstr "Wachtwoord"
 
 #, elixir-format
-#: lib/project_web/templates/email/confirmation_mail.html.eex:1
-msgid "Welcome %{firstname} %{lastname}"
-msgstr "Welkom %{firstname} %{lastname}"
-
-#, elixir-format
-#: lib/project_web/templates/email/order_confirmation.html.eex:1
-msgid "Thank you for your order!"
-msgstr "Bedankt voor uw bestelling!"
+#: lib/project_web/templates/email/verification.html.eex:2
+msgid "Verify account"
+msgstr "Verifieer uw account"
