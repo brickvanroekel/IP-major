@@ -39,6 +39,6 @@ defmodule ProjectWeb.LayoutView do
   end
 
   def new_locale(conn, locale, language_title) do
-    "<a href=\"#{Routes.page_path(conn, :index, locale: locale)}\">#{language_title}</a>" |> raw
+    "<a class='dropdown-item' href=\"#{Routes.user_path(conn, :new, locale: locale)}\">#{language_title}</a>" |> raw
   end
 end

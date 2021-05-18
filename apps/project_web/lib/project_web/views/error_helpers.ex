@@ -39,9 +39,9 @@ defmodule ProjectWeb.ErrorHelpers do
     # should be written to the errors.po file. The :count option is
     # set by Ecto and indicates we should also apply plural rules.
     if count = opts[:count] do
-      Gettext.dngettext(ProjectWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(I18nTranslations.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(ProjectWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(I18nTranslations.Gettext, "errors", msg, opts)
     end
   end
 end

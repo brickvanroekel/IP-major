@@ -12,45 +12,44 @@
 
 <body>
   <header>
-    <section class="container">
-      <nav role="navigation">
-      <%= if current_user(@conn) do%>
-        <%= if current_role(@conn) == "admin" do%>
-          <ul>
-          <li><%= link "Home", to: Routes.page_path(@conn, :index)  %></li>
-            <li><%= link "Users Overview", to: Routes.user_path(@conn, :overview)  %></li>
-            <li><%= link "Register Product", to: Routes.product_path(@conn, :new)  %></li>
-            <li><%= link "Products Overview", to: Routes.product_path(@conn, :overview)  %></li>
-            <%= cart_item_count(@conn) %> item(s) in your cart
-            <li><%= link "Show cart", to: Routes.cart_path(@conn, :show)  %></li>
-            <li><%= link "Show Orders", to: Routes.order_path(@conn, :show)  %></li>
+      <nav role="navigation" class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <ul class="navbar-nav">
+            <li class="nav-item active"><%= link "Home", to: Routes.page_path(@conn, :index), class: "nav-link" %></li>
+            <%= if current_user(@conn) do%>
+              <%= if current_role(@conn) == "admin" do%>
+                <li class="nav-item active"><%= link "Register User", to: Routes.user_path(@conn, :new), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Users Overview", to: Routes.user_path(@conn, :overview), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Register Product", to: Routes.product_path(@conn, :new), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Products Overview", to: Routes.product_path(@conn, :overview), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Show cart", to: Routes.cart_path(@conn, :show), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Show Orders", to: Routes.order_path(@conn, :show), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= cart_item_count(@conn) %> item(s) in your cart</li>
+
+              <% else %>
+                <li class="nav-item active"><%= link "Users Overview", to: Routes.user_path(@conn, :overview), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Products Overview", to: Routes.product_path(@conn, :overview), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Show cart", to: Routes.cart_path(@conn, :show), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= link "Show Orders", to: Routes.order_path(@conn, :show), class: "nav-link"  %></li>
+                <li class="nav-item active"><%= cart_item_count(@conn) %> item(s) in your cart</li>
+
+              <% end %>
+            <% else %>
+              <li class="nav-item active"><%= link "Register User", to: Routes.user_path(@conn, :new), class: "nav-link"  %></li>
+              <li class="nav-item active"><%= link "Products Overview", to: Routes.product_path(@conn, :overview), class: "nav-link"  %></li>
+            <% end %>
+            <li>
+              <div>
+                <%= new_locale @conn, :en, "English" %>
+                <%= new_locale @conn, :nl, "Nederlands" %>
+              </div>
+            </li>
           </ul>
-        <% else %>
-          <ul>
-            <li><%= link "Home", to: Routes.page_path(@conn, :index)  %></li>
-            <li><%= link "Users Overview", to: Routes.user_path(@conn, :overview)  %></li>
-            <li><%= link "Products Overview", to: Routes.product_path(@conn, :overview)  %></li>
-            <%= cart_item_count(@conn) %> item(s) in your cart
-            <li><%= link "Show cart", to: Routes.cart_path(@conn, :show)  %></li>
-            <li><%= link "Show Orders", to: Routes.order_path(@conn, :show)  %></li>
-          </ul>
-        <% end %>
-      <% else %>
-        <ul>
-          <li><%= link "Home", to: Routes.page_path(@conn, :index)  %></li>
-          <li><%= link "Register User", to: Routes.user_path(@conn, :new)  %></li>
-          <li><%= link "Products Overview", to: Routes.product_path(@conn, :overview)  %></li>
-        </ul>
-      <% end %>
+        </div>
       </nav>
-      <ul>
-        <li><%= new_locale @conn, :en, "English" %></li>
-        <li><%= new_locale @conn, :nl, "Nederlands" %></li>
-      </ul>
-      <a href="https://phoenixframework.org/" class="phx-logo">
-        <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo" />
-      </a>
-    </section>
   </header>
   <main role="main" class="container">
     <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

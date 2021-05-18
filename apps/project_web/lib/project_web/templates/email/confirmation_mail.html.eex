@@ -1,1 +1,1 @@
-<p>Welcome <%= @user.first_name %> <%= @user.last_name %></p>
+<p> <%= gettext "Welcome %{firstname} %{lastname}", firstname: @user.first_name, lastname: @user.last_name %></p>

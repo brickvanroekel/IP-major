@@ -1,0 +1,86 @@
+## This file is a PO Template file.
+##
+## "msgid"s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run "mix gettext.extract" to bring this file up to
+## date. Leave "msgstr"s empty as changing them here as no
+## effect: edit them in PO (.po) files instead.
+msgid ""
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:8
+msgid "%{first_name}"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:12
+msgid "%{last_name}"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/register.html.eex:2
+msgid "%{title}"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:28
+msgid "City"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:24
+msgid "Country"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:16
+msgid "Email"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:40
+msgid "Number"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:4
+msgid "Oops, something went wrong! Please check the errors below."
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:32
+msgid "Postal code"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:46
+msgid "Role"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:53
+msgid "Save"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:36
+msgid "Street"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/email/order_confirmation.html.eex:1
+msgid "Thank you for your order!"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/email/confirmation_mail.html.eex:1
+msgid "Welcome %{firstname} %{lastname}"
+msgstr ""
+
+#, elixir-format
+#: lib/project_web/templates/user/form.html.eex:20
+msgid "password"
+msgstr ""

@@ -1,16 +1,16 @@
 <h1>Listing Products</h1>
 <div>
-     <%= form_for @conn, Routes.product_path(@conn, :overview), [method: :get, class: "pull-right"], fn f -> %>
-      <%= search_input f, :query, placeholder: "Search title, size or color" %>
+     <%= form_for @conn, Routes.product_path(@conn, :overview), [method: :get, class: "form-inline"], fn f -> %>
+      <%= search_input f, :query, placeholder: "Search title, size or color", class: "form-control mr-sm-2" %>
       <%= error_tag f, :description %>
       <%= submit "Search" %>
      <% end %>
 </div>
 <div>
-     <%= form_for @conn, Routes.product_path(@conn, :filter), [method: :get, class: "pull-right"], fn f -> %>
-      <%= search_input f, :min, placeholder: "Minimum price"%>
+     <%= form_for @conn, Routes.product_path(@conn, :filter), [method: :get, class: "form-inline"], fn f -> %>
+      <%= search_input f, :min, placeholder: "Minimum price", class: "form-control mr-sm-2"%>
       <%= error_tag f, :description %>
-      <%= search_input f, :max, placeholder: "Maximum price"%>
+      <%= search_input f, :max, placeholder: "Maximum price", class: "form-control mr-sm-2"%>
       <%= error_tag f, :description %>
       <%= submit "Filter" %>
      <% end %>
