@@ -2,7 +2,7 @@ defmodule ProjectWeb.Api.ProductController do
   use ProjectWeb, :controller
 
   alias Project.ProductContext
-  alias Project.ProductContext.Product
+  #alias Project.ProductContext.Product
 
 
   def index(conn, _params) do
