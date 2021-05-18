@@ -78,7 +78,7 @@ defmodule ProjectWeb.UserController do
     |> redirect(to: Routes.user_path(conn, :overview))
   end
 
-  def update_verification(conn, %{"id" => token, "user" => verification_attrs}) do
+  def update_verification(conn, %{"verification_token" => token, "user" => verification_attrs}) do
     user = UserContext.get_user_from_token(token)
   
     verification_attrs =

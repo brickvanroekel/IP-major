@@ -10,6 +10,7 @@ defmodule Project.ProductContext do
   @doc "Creates a product based on some external attributes"
   def create_product(attributes) do
     %Product{}
+    |> Repo.preload(:orders)
     |> Product.changeset(attributes)
     |> Repo.insert()
   end
