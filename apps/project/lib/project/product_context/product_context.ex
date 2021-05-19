@@ -15,6 +15,14 @@ defmodule Project.ProductContext do
     |> Repo.insert()
   end
 
+  def create_product_bulk(file) do
+    file
+    |> File.stream!()
+    |> CSV.decode!
+    |> Enum.each(fn(product) -> Product.changeset(%Product{}, %{title: Enum.at(product, 0), description: Enum.at(product, 1), size: Enum.at(product, 2), color: Enum.at(product, 3), price: Enum.at(product, 4)})
+    |> Repo.insert() end)
+  end
+
   @doc "Returns a specific product or raises an error"
   def get_product!(id), do: Repo.get!(Product, id)
 

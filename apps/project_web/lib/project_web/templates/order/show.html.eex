@@ -4,24 +4,19 @@
         <table>
             <thead>
                 <tr>
-                    <th>title</th>
-                    <th>size</th>
-                    <th>color</th>
-                    <th>price</th>
+                    <th>Order Nummer</th>
+                    <th>Total price</th>
+                    <th>Date</th>
                 </tr>
             </thead>
             <tbody>
-                <%= for product <- order.products do %>
                 <tr>
-                    <td><%= product.title %></td>
-                    <td><%= product.size %></td>
-                    <td><%= product.color %></td>
-                    <td><%= product.price %></td>
+                    <td><%= order.id %></td>
+                    <td><%= order.total_price %></td>
+                    <td><%= order.inserted_at %></td>
                 </tr>
-                <% end %>
             </tbody>
         </table>
-        <p>Total: <%= order.total_price %></p>
     <% end %>
 <% else %>
     <p>You haven't placed any orders yet</p>
