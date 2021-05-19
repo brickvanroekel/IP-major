@@ -7,7 +7,7 @@ defmodule Project.UserContext do
 
   @doc "Returns a user changeset"
   def change_user(%User{} = user) do
-    user |> User.changeset(%{})
+    user |> User.admin_changeset(%{})
   end
 
   @doc "Creates a user based on some external attributes"
@@ -15,10 +15,19 @@ defmodule Project.UserContext do
     %User{}
     |> Repo.preload(:orders)
     |> Repo.preload(:api_key)
-    |> User.changeset(attributes)
+    |> User.register_changeset(attributes)
     |> Repo.insert()
   end
 
+  def create_admin(attributes) do
+    %User{}
+    |> Repo.preload(:orders)
+    |> Repo.preload(:api_key)
+    |> User.admin_changeset(attributes)
+    |> Repo.insert()
+  end
+
+  @spec get_user!(any) :: any
   @doc "Returns a specific user or raises an error"
   def get_user!(id), do: Repo.get!(User, id)
 
@@ -28,7 +37,7 @@ defmodule Project.UserContext do
   @doc "Update an existing user with external attributes"
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.register_changeset(attrs)
     |> Repo.update()
   end
 
@@ -60,7 +69,7 @@ defmodule Project.UserContext do
       "verification_sent_at" => NaiveDateTime.utc_now()
     }
     user
-    |> User.changeset(attrs)
+    |> User.admin_changeset(attrs)
     |> Repo.update!()
   end
 
@@ -72,7 +81,7 @@ defmodule Project.UserContext do
     current_time = NaiveDateTime.utc_now()
     Time.diff(current_time, token_sent_at) < 86400
   end
-  
+
   def generate_user_api_key(%User{} = user) do
     key = 10
       |> :crypto.strong_rand_bytes()

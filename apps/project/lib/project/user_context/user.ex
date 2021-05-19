@@ -29,10 +29,23 @@ defmodule Project.UserContext.User do
   def get_acceptable_roles, do: @acceptable_roles
 
   @doc false
-  def changeset(user, attrs) do
+  def admin_changeset(user, attrs) do
     user
     |> cast(attrs, [:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number, :role ,:verification_token, :verification_sent_at])
     |> validate_required([:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number, :role])
+    |> validate_inclusion(:role, @acceptable_roles)
+    |> cast_assoc(:orders)
+    |> unique_constraint(:email, name: :unique_users_index,
+      message:
+        "E-mail already in use."
+    )
+    |> put_password_hash()
+  end
+
+  def register_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number,:verification_token, :verification_sent_at])
+    |> validate_required([:first_name, :last_name, :email, :password, :country, :city, :postal_code, :street, :number])
     |> validate_inclusion(:role, @acceptable_roles)
     |> cast_assoc(:orders)
     |> unique_constraint(:email, name: :unique_users_index,

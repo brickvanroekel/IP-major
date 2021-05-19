@@ -57,7 +57,7 @@ defmodule ProjectWeb.UserController do
 
   def update(conn, %{"user_id" => id, "user" => user_params}) do
     user = UserContext.get_user!(id)
-
+    roles = UserContext.get_acceptable_roles()
     case UserContext.update_user(user, user_params) do
       {:ok, user} ->
         conn
@@ -65,7 +65,7 @@ defmodule ProjectWeb.UserController do
         |> redirect(to: Routes.user_path(conn, :show, user))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        render(conn, "edit.html", user: user, changeset: changeset, acceptable_roles: roles)
     end
   end
 

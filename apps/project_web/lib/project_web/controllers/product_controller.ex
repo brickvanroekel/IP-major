@@ -4,7 +4,7 @@ defmodule ProjectWeb.ProductController do
   alias Project.UserContext
   alias Project.ProductContext
   alias Project.ProductContext.Product
-  alias Project.Repo
+  #alias Project.Repo
 
   def new(conn, _parameters) do
     changeset = ProductContext.change_product(%Product{})

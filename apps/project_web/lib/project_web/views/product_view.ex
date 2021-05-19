@@ -48,14 +48,14 @@ defmodule ProjectWeb.ProductView do
     current_user = current_user(conn)
     case current_user do
       nil ->
-        "user"
-      current_user ->  
+        "guest"
+      current_user ->
         case current_user.role do
           "User" ->
             "user"
           "Admin" ->
             "admin"
-        end  
+        end
     end
   end
 end

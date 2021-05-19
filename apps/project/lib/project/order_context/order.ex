@@ -1,7 +1,7 @@
 defmodule Project.OrderContext.Order do
   use Ecto.Schema
   import Ecto.Changeset
-  import Ecto.Query
+  #import Ecto.Query
 
   alias Project.UserContext.User
   alias Project.ProductContext.Product

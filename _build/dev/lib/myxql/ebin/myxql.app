@@ -1,6 +1,6 @@
 {application,myxql,
-             [{applications,[kernel,stdlib,elixir,ssl,public_key,
-                             db_connection,decimal]},
+             [{applications,[kernel,stdlib,elixir,ssl,public_key,decimal,
+                             db_connection]},
               {description,"MySQL 5.5+ driver for Elixir"},
               {modules,['Elixir.DBConnection.Query.MyXQL.Query',
                         'Elixir.DBConnection.Query.MyXQL.TextQuery',
