@@ -1,0 +1,28 @@
+<h1>Order history</h1>
+<%= if length(@orders) > 0 do%>
+<table>
+    <thead>
+        <tr>
+            <th>Order number</th>
+            <th>Total price</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= for order <- @orders do %>
+        <tr>
+            <td><%= order.id %></td>
+            <td><%= order.total_price %></td>
+            <th><%= order.inserted_at %></th>
+
+            <td>
+                <span><%= link "Show", to: Routes.order_path(@conn, :show, order) %></span>
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<% else %>
+    <p>You haven't placed any orders yet</p>
+<% end %>

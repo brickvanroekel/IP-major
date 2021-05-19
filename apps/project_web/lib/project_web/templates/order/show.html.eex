@@ -1,23 +1,21 @@
-<h1>Order History</h1>
-<%= if length(@orders) > 0 do%>
-    <%= for order <- @orders do %>
-        <table>
-            <thead>
-                <tr>
-                    <th>Order Nummer</th>
-                    <th>Total price</th>
-                    <th>Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><%= order.id %></td>
-                    <td><%= order.total_price %></td>
-                    <td><%= order.inserted_at %></td>
-                </tr>
-            </tbody>
-        </table>
-    <% end %>
-<% else %>
-    <p>You haven't placed any orders yet</p>
-<% end %>
+<h1>Order details</h1>
+<h2>Order #<%= @order.id %></h2>
+<table>
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Title</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= for product <- @order.products do %>
+        <tr>
+            <td><%= product.id %></td>
+            <td><%= product.title %></td>
+            <th><%= product.price %></th>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<h2>Total price: <%= @order.total_price %></h2>

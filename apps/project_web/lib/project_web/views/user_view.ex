@@ -21,6 +21,7 @@ defmodule ProjectWeb.UserView do
     end
   end
 
+  @spec current_user_key(Plug.Conn.t()) :: any
   def current_user_key(conn) do
     current_user = current_user(conn)
     case current_user.api_key do

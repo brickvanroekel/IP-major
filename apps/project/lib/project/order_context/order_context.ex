@@ -17,4 +17,14 @@ defmodule Project.OrderContext do
   def list_orders() do
     Repo.all(Order)
   end
+
+  def list_orders(params) do
+    #search_term = get_in(params, ["query"])
+    Order
+    |> Order.search(params)
+    |> Repo.all()
+  end
+
+  def get_order!(id), do: Repo.get!(Order, id)
+
 end

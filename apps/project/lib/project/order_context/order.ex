@@ -1,10 +1,12 @@
 defmodule Project.OrderContext.Order do
   use Ecto.Schema
   import Ecto.Changeset
-  #import Ecto.Query
+  import Ecto.Query
 
   alias Project.UserContext.User
   alias Project.ProductContext.Product
+  alias Project.UserContext.User
+
 
   schema "orders" do
     field :total_price, :decimal
@@ -23,5 +25,12 @@ defmodule Project.OrderContext.Order do
     |> cast_assoc(:user)
     |> unique_constraint(:id, name: :unique_orders_index, message:
     "ID already in use.")
+  end
+
+  def search(query, search_term) do
+    wildcard_search = search_term
+
+    from order in query,
+    where: order.user_id == ^wildcard_search
   end
 end

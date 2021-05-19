@@ -50,10 +50,12 @@ defmodule ProjectWeb.Router do
     get "/verify", UserController, :update_verification
 
     get "/cart", CartController, :show
-    get "/cartOrder", CartController, :order
+    get "/cartOrder", OrderController, :create
     resources "/cart", CartController, only: [:update, :delete, :show]
 
-    get "/order", OrderController, :show
+    get "/order", OrderController, :overview
+    get "/order/:order_id", OrderController, :show
+
 
   end
 
@@ -89,7 +91,7 @@ defmodule ProjectWeb.Router do
     resources "/products", ProductController, only: [:show, :index]
 
     pipe_through :api_auth
-    resources "/users", UserController, only: [:index]
+    resources "/users", UserController, only: [:show, :index]
 
   end
 

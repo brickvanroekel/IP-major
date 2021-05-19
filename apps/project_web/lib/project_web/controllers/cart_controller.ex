@@ -2,9 +2,9 @@ defmodule ProjectWeb.CartController do
   use ProjectWeb, :controller
 
 
-  alias Project.{ProductContext, Carts, OrderContext}
+  alias Project.{ProductContext, Carts}
   alias Project.Workers.CartAgent
-  alias Project.{Mailer, Email}
+  #alias Project.{Mailer, Email}
 
 
 
@@ -47,17 +47,4 @@ defmodule ProjectWeb.CartController do
     |> Map.get(:price)
   end
 
-  def order(conn, _params) do
-    current_user = Guardian.Plug.current_resource(conn)
-    products = Carts.get(current_user.email)
-    send_order_notification(products, current_user)
-    attrs = %{"total_price" => total_price(products)}
-    OrderContext.create_order(attrs, products, current_user)
-    Carts.empty(current_user.email)
-    render(conn, "thanks.html")
-  end
-
-  defp send_order_notification(cart, current_user) do
-    Email.order_email(cart, current_user) |> Mailer.deliver_later()
-  end
 end

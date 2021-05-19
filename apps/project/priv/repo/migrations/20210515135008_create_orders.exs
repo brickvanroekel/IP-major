@@ -3,7 +3,7 @@ defmodule Project.Repo.Migrations.CreateOrders do
 
   def change do
     create table(:orders) do
-      add :user_id, references(:users)
+      add :user_id, references(:users, on_delete: :delete_all)
       add :total_price, :decimal
 
       timestamps()

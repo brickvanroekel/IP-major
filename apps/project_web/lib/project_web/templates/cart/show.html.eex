@@ -24,7 +24,7 @@
         </tbody>
     </table>
     <p>Total: <%= @total_price %></p>
-    <span><%= link "Order", to: Routes.cart_path(@conn, :order)%></span>
+    <span><%= link "Order", to: Routes.order_path(@conn, :create)%></span>
 <% else %>
     <p>No products in your shopping cart</p>
 <% end %>
