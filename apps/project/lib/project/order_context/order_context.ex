@@ -6,7 +6,7 @@ defmodule Project.OrderContext do
     order |> Order.changeset(%{})
   end
 
-  def create_order(attributes, products, user) do
+  def create_order(attributes, _products, _user) do
     %Order{}
     |> Repo.preload(:products)
     |> Repo.preload(:user)

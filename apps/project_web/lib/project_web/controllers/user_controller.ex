@@ -92,7 +92,7 @@ defmodule ProjectWeb.UserController do
          |> redirect(to: Routes.session_path(conn, :new))
 
     else
-      {:error, changeset} ->
+      {:error, _changeset} ->
         conn
         |> put_flash(:error, "Problem verifying your account")
         |> redirect(to: Routes.session_path(conn, :new))
