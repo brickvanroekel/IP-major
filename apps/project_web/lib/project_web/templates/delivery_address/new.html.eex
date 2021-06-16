@@ -1,0 +1,2 @@
+<h1>Delivery address</h1>
+<%= render "form.html", Map.put(assigns, :action, Routes.delivery_address_path(@conn, :create)) %>

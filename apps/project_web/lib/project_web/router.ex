@@ -53,6 +53,8 @@ defmodule ProjectWeb.Router do
     get "/cartOrder", OrderController, :create
     resources "/cart", CartController, only: [:update, :delete, :show]
 
+    resources "/delivery_address", DeliveryAddressController, only: [:new, :create]
+
     get "/order", OrderController, :overview
     get "/order/:order_id", OrderController, :show
 

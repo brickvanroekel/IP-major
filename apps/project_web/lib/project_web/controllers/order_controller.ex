@@ -1,7 +1,7 @@
 defmodule ProjectWeb.OrderController do
     use ProjectWeb, :controller
 
-    alias Project.{Carts, OrderContext}
+    alias Project.{Carts, OrderContext,DeliveryAddressContext}
     #alias Project.Workers.CartAgent
     alias Project.{Mailer, Email}
     alias Project.Repo
@@ -9,7 +9,9 @@ defmodule ProjectWeb.OrderController do
 
     def overview(conn, _params) do
         current_user = Guardian.Plug.current_resource(conn)
-        orders = OrderContext.list_orders(current_user.id)
+        orders = current_user.id
+        |> OrderContext.list_orders()
+        |> Repo.preload(:delivery_address)
         render(conn, "overview.html", orders: orders)
     end
 
@@ -17,7 +19,6 @@ defmodule ProjectWeb.OrderController do
         order = id
         |> OrderContext.get_order!()
         |> Repo.preload(:products)
-
         render(conn, "show.html", order: order)
       end
 
@@ -28,11 +29,11 @@ defmodule ProjectWeb.OrderController do
       |> Map.get(:price)
     end
 
-    def create(conn, _params) do
+    def create(conn, %{"delivery_address_params" => delivery_address_params}) do
       current_user = Guardian.Plug.current_resource(conn)
       products = Carts.get(current_user.email)
 
-      order_changeset = Ecto.build_assoc(current_user, :orders, products: products, total_price: total_price(products))
+      order_changeset = Ecto.build_assoc(current_user, :orders, products: products, total_price: total_price(products), delivery_addres: delivery_address_params)
       Repo.insert(order_changeset)
 
       Carts.empty(current_user.email)

@@ -10,6 +10,7 @@ defmodule Project.OrderContext do
     %Order{}
     |> Repo.preload(:products)
     |> Repo.preload(:user)
+    |> Repo.preload(:deliver_address)
     |> Order.changeset(attributes)
     |> Repo.insert()
   end

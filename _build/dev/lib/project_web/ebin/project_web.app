@@ -14,6 +14,8 @@
                         'Elixir.ProjectWeb.Application',
                         'Elixir.ProjectWeb.CartController',
                         'Elixir.ProjectWeb.CartView',
+                        'Elixir.ProjectWeb.DeliveryAddressController',
+                        'Elixir.ProjectWeb.DeliveryAddressView',
                         'Elixir.ProjectWeb.EmailView',
                         'Elixir.ProjectWeb.Endpoint',
                         'Elixir.ProjectWeb.ErrorHandler',

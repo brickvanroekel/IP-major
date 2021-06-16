@@ -7,12 +7,11 @@ defmodule Project.OrderContext.Order do
   alias Project.ProductContext.Product
   alias Project.UserContext.User
 
-
   schema "orders" do
     field :total_price, :decimal
     belongs_to :user, User
     many_to_many :products, Product, join_through: "orders_products"
-
+    has_one :delivery_address, Project.DeliveryAddressContext.DeliveryAddress
     timestamps()
   end
 
@@ -23,6 +22,7 @@ defmodule Project.OrderContext.Order do
     |> validate_required([:total_price])
     |> cast_assoc(:products)
     |> cast_assoc(:user)
+    |> cast_assoc(:delivery_address)
     |> unique_constraint(:id, name: :unique_orders_index, message:
     "ID already in use.")
   end
