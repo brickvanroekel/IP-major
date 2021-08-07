@@ -6,8 +6,6 @@
             <th>Order number</th>
             <th>Total price</th>
             <th>Date</th>
-            <th>Delivery</th>
-
             <th></th>
         </tr>
     </thead>
@@ -17,7 +15,6 @@
             <td><%= order.id %></td>
             <td><%= order.total_price %></td>
             <th><%= order.inserted_at %></th>
-            <th><%= order.delivery_address%></th>
             <td>
                 <span><%= link "Show", to: Routes.order_path(@conn, :show, order) %></span>
             </td>

@@ -11,14 +11,15 @@ defmodule ProjectWeb.OrderController do
         current_user = Guardian.Plug.current_resource(conn)
         orders = current_user.id
         |> OrderContext.list_orders()
-        |> Repo.preload(:delivery_address)
         render(conn, "overview.html", orders: orders)
     end
 
+    @spec show(Plug.Conn.t(), map) :: Plug.Conn.t()
     def show(conn, %{"order_id" => id}) do
         order = id
         |> OrderContext.get_order!()
         |> Repo.preload(:products)
+        |> Repo.preload(:delivery_address)
         render(conn, "show.html", order: order)
       end
 
@@ -32,8 +33,8 @@ defmodule ProjectWeb.OrderController do
     def create(conn, %{"delivery_address_params" => delivery_address_params}) do
       current_user = Guardian.Plug.current_resource(conn)
       products = Carts.get(current_user.email)
-
-      order_changeset = Ecto.build_assoc(current_user, :orders, products: products, total_price: total_price(products), delivery_addres: delivery_address_params)
+      delivery_address = DeliveryAddressContext.get_delivery_address!(delivery_address_params)
+      order_changeset = Ecto.build_assoc(current_user, :orders, products: products, total_price: total_price(products), delivery_address: delivery_address)
       Repo.insert(order_changeset)
 
       Carts.empty(current_user.email)

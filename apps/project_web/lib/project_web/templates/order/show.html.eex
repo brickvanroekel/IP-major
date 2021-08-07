@@ -19,4 +19,8 @@
     </tbody>
 </table>
 <h2>Total price: <%= @order.total_price %></h2>
-<h2>Delivery address: <%= @order.delivery_address %></h2
+<h2>Delivery address: <%= @order.delivery_address.street %> <%= @order.delivery_address.number %>
+<%= if @order.delivery_address.bus do%>
+/<%= @order.delivery_address.bus %>
+<%end %>
+, <%= @order.delivery_address.postal_code %></h2

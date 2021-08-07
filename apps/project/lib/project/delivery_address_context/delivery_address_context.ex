@@ -16,6 +16,7 @@ defmodule Project.DeliveryAddressContext do
 
   end
 
+  def get_delivery_address!(id), do: Repo.get!(DeliveryAddress, id)
 
   #def get_address(params) do
   #  #search_term = get_in(params, ["query"])
